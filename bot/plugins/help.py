@@ -35,23 +35,23 @@ def help_answer(c, callback_query):
 def map(pos):
     if(pos==1):
         button = [
-            [InlineKeyboardButton(text = '-->', callback_data = "help+2")]
+            [InlineKeyboardButton(text = '➡️', callback_data = "help+2")]
         ]
     elif(pos==len(tr.HELP_MSG)-1):
 
         button = [
             [
-             InlineKeyboardButton(text = 'Support Chat', url = "https://t.me/lkhitech"),
-             InlineKeyboardButton(text = 'Feature Request', url = "https://github.com/kjeymax/GDUPLOAD_BOT2")
+             InlineKeyboardButton(text = 'Updates Channel', url = "https://t.me/pyrogrammers"),
+             InlineKeyboardButton(text = 'Support Group', url = "https://t.me/+7ScFy39Vckk5MWQ1")
             ],
-            [InlineKeyboardButton(text = '<--', callback_data = f"help+{pos-1}")]
+            [InlineKeyboardButton(text = '⬅️', callback_data = f"help+{pos-1}")]
 
         ]
     else:
         button = [
             [
-                InlineKeyboardButton(text = '<--', callback_data = f"help+{pos-1}"),
-                InlineKeyboardButton(text = '-->', callback_data = f"help+{pos+1}")
+                InlineKeyboardButton(text = '⬅️', callback_data = f"help+{pos-1}"),
+                InlineKeyboardButton(text = '➡️', callback_data = f"help+{pos+1}")
             ],
         ]
     return button
