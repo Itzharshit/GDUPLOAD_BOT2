@@ -46,10 +46,10 @@ async def download_coroutine(session, url, file_name, event, start, bot):
         if "text" in content_type and total_length < 500:
             return await response.release()
         await event.edit(
-            """**Initiating Download**
-**URL:** {}
-**File Name:** {}
-**File Size:** {}""".format(
+            """**Starting Download**
+**🔗 URL:** {}
+**✍️ File Name:** {}
+**📂 File Size:** {}""".format(
                 url,
                 os.path.basename(file_name).replace("%20", " "),
                 get_size(total_length),
@@ -76,11 +76,11 @@ async def download_coroutine(session, url, file_name, event, start, bot):
                         if total_length < downloaded:
                             total_length = downloaded
                         current_message = """Downloading : {}%
-URL: {}
-File Name: {}
-File Size: {}
-Downloaded: {}
-ETA: {}""".format("%.2f" % (percentage), url, file_name.split("/")[-1], humanbytes(total_length), humanbytes(downloaded), time_formatter(estimated_total_time))
+🔗 URL: {}
+✍️ File Name: {}
+📂 File Size: {}
+✅ Downloaded: {}
+🔄 ETA: {}""".format("%.2f" % (percentage), url, file_name.split("/")[-1], humanbytes(total_length), humanbytes(downloaded), time_formatter(estimated_total_time))
                         if (
                             current_message != display_message
                             and current_message != "empty"
