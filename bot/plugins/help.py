@@ -12,46 +12,6 @@ def _start(client, message):
     )
 
 
-@Client.on_message(filters.private & filters.incoming & filters.command(['help']), group=2)
-def _help(client, message):
-    client.send_message(chat_id = message.chat.id,
-        text = tr.HELP_MSG[1],
-        reply_markup = InlineKeyboardMarkup(map(1)),
-        reply_to_message_id = message.message_id
-    )
-
-help_callback_filter = filters.create(lambda _, __, query: query.data.startswith('help+'))
-
-@Client.on_callback_query(help_callback_filter)
-def help_answer(c, callback_query):
-    chat_id = callback_query.from_user.id
-    message_id = callback_query.message.message_id
-    msg = int(callback_query.data.split('+')[1])
-    c.edit_message_text(chat_id = chat_id,    message_id = message_id,
-        text = tr.HELP_MSG[msg],    reply_markup = InlineKeyboardMarkup(map(msg))
-    )
-
-
-def map(pos):
-    if(pos==1):
-        button = [
-            [InlineKeyboardButton(text = '➡️', callback_data = "help+2")]
-        ]
-    elif(pos==len(tr.HELP_MSG)-1):
-
-        button = [
-            [
-             InlineKeyboardButton(text = 'Updates Channel', url = "https://t.me/pyrogrammers"),
-             InlineKeyboardButton(text = 'Support Group', url = "https://t.me/+7ScFy39Vckk5MWQ1")
-            ],
-            [InlineKeyboardButton(text = '⬅️', callback_data = f"help+{pos-1}")]
-
-        ]
-    else:
-        button = [
-            [
-                InlineKeyboardButton(text = '⬅️', callback_data = f"help+{pos-1}"),
-                InlineKeyboardButton(text = '➡️', callback_data = f"help+{pos+1}")
-            ],
-        ]
-    return button
+@app.on_message(filters.incoming & filters.command(['help']))
+def help_message(app, message):
+    message.reply_text(f"Hi {message.from_user.mention()}\nI can encode Telegram files in x265, just send me a video.", quote=True)
